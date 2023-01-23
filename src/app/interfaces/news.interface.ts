@@ -47,7 +47,7 @@ export interface Contentlet {
 
 export interface DocContent {
     type:    string;
-    attrs:   DocContentAttrs;
+    attrs?:   DocContentAttrs;
     content: BlogContent;
 }
 

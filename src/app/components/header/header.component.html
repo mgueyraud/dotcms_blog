@@ -1,12 +1,15 @@
 <header class="header">
     <h1 class="main-title">DotCMS News Listing</h1>
     <div class="filter-date">
-        <label for="date-filter">Filter by Date:</label>
-        <select id="filter-date" (change)="onChange($event)">
-            <option value="">All</option>
-            <option value="2022">2022</option>
-            <option value="2021">2021</option>
-            <option value="2020">2020</option>
-        </select>
+        <div>
+            <label for="date-filter">Filter by Date:</label>
+            <select id="filter-date" (change)="onChange($event)">
+                <option value="">All</option>
+                <option value="2022">2022</option>
+                <option value="2021">2021</option>
+                <option value="2020">2020</option>
+            </select>
+            <a [routerLink]="['/news/limit/'+limit+'/offset/'+offset+'/new-post']" class="btn">Create new post</a>
+        </div>
     </div>
 </header>

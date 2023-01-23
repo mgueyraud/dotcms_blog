@@ -16,10 +16,10 @@ export class NewsListItemComponent {
   constructor(private route: ActivatedRoute){}
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe((params: ParamMap) => {
+    (this.route.firstChild || this.route).paramMap.subscribe((params: ParamMap) => {
       this.limit = Number(params.get('limit'));
       this.offset = Number(params.get('offset'));
-      this.selectedNew = params.get('selectedNew')
+      this.selectedNew = params.get('selectedNew');
     });
   }
 }

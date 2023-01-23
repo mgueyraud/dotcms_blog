@@ -8,7 +8,7 @@
                 <h2>{{post.title}}</h2>
                 <div class="article__pubDate-readTime">
                     <p>Published {{post.postingDate | publishedFormat}}</p>
-                    <p>{{post.blogContent.attrs.readingTime}} min read</p>
+                    <p>{{post.blogContent.attrs ? post.blogContent.attrs.readingTime + 'm read' : ''}}</p>
                 </div>
             </div>
         </div>
