@@ -6,7 +6,10 @@
             [alt]="'Image about the article '+post.title" class="article__image" />
             <div class="article__title-time-wrapper">
                 <h2>{{post.title}}</h2>
-                <p>{{post.postingDate}}</p>
+                <div class="article__pubDate-readTime">
+                    <p>Published {{post.postingDate | publishedFormat}}</p>
+                    <p>{{post.blogContent.attrs.readingTime}} min read</p>
+                </div>
             </div>
         </div>
         <div [innerHTML]="htmlString" class="article__content"></div>
@@ -14,6 +17,9 @@
 </ng-template>
 
 <ng-template #loading>
-    <p>Loading article...</p>
+    <div class="article__loading">
+        <div class="skeleton skeleton--img"></div>
+        <div class="skeleton skeleton--text"></div>
+    </div>
 </ng-template>
 

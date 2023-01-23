@@ -2,11 +2,11 @@
     <h1 class="main-title">DotCMS News Listing</h1>
     <div class="filter-date">
         <label for="date-filter">Filter by Date:</label>
-        <select id="filter-date">
+        <select id="filter-date" (change)="onChange($event)">
             <option value="">All</option>
-            <option value="2023">2022</option>
-            <option value="2022">2021</option>
-            <option value="2021">2020</option>
+            <option value="2022">2022</option>
+            <option value="2021">2021</option>
+            <option value="2020">2020</option>
         </select>
     </div>
 </header>

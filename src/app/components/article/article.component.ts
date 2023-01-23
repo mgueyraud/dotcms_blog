@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { tap } from 'rxjs';
+import { tap, single } from 'rxjs';
 import { APIResponse } from 'src/app/interfaces/news.interface';
 import { NewsService } from '../../services/news.service';
 import { Contentlet, BlogContent, FinalContent } from '../../interfaces/news.interface';
@@ -12,7 +12,7 @@ import { Contentlet, BlogContent, FinalContent } from '../../interfaces/news.int
 })
 export class ArticleComponent implements OnInit {
   selectedNew!: string | null;
-  post!: Contentlet;
+  post: Contentlet | null = null;
   htmlString!: string;
 
   constructor(private route: ActivatedRoute, private newsSvc: NewsService){}
@@ -22,6 +22,7 @@ export class ArticleComponent implements OnInit {
       this.selectedNew = params.get('selectedNew');
 
       if(this.selectedNew){
+        this.post = null;
         this.newsSvc.getSingleNew(this.selectedNew)
               .pipe(tap((res: APIResponse) => {
                 this.post = res.contentlets[0];
@@ -33,7 +34,7 @@ export class ArticleComponent implements OnInit {
 
   }
 
-  buildHtml(content: BlogContent[] | FinalContent[]):string  {
+  buildHtml(content: BlogContent):string  {
     let html = '';
 
     for (let index = 0; index < content.length; index++) {
@@ -54,6 +55,13 @@ export class ArticleComponent implements OnInit {
         html += '<p>';
         html += this.buildHtml(singleContent.content);
         html += '</p>';
+      }
+
+      if(singleContent.type === 'heading'){
+        const tag = `h${singleContent.attrs.level+1}`;
+        html += `<${tag}>`;
+        html += this.buildHtml(singleContent.content);
+        html += `</${tag}>`;
       }
 
       if(singleContent.type === 'text'){

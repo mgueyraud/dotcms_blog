@@ -48,7 +48,7 @@ export interface Contentlet {
 export interface DocContent {
     type:    string;
     attrs:   DocContentAttrs;
-    content: BlogContent[];
+    content: BlogContent;
 }
 
 export interface DocContentAttrs {
@@ -57,10 +57,21 @@ export interface DocContentAttrs {
     readingTime: number;
 }
 
-export interface BlogContent {
+export type BlogContent = HeadingContent[] | OtherContent[] | FinalContent[];
+
+export interface HeadingContent {
+    type:   'heading';
+    attrs:  {
+        level: number,
+        [key: string]: any
+    };
+    content: BlogContent
+}
+
+export interface OtherContent {
     type:    'bulletList' | 'listItem' | 'paragraph';
     attrs?:  {[key: string]: any};
-    content: BlogContent[] | FinalContent[];
+    content:  BlogContent;
 }
 
 export interface FinalContent {

@@ -11,6 +11,7 @@ import { ArticleComponent } from './components/article/article.component';
 import { HttpClientModule } from '@angular/common/http';
 import { TimeSincePipe } from './pipes/timeSince.pipe';
 import { LazyImgDirective } from './directives/images.directives';
+import { PublishedFormatPipe } from './pipes/pubishedFormat.pipe';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { LazyImgDirective } from './directives/images.directives';
     NewsComponent,
     ArticleComponent,
     TimeSincePipe,
+    PublishedFormatPipe,
     LazyImgDirective
   ],
   imports: [
