@@ -1,0 +1,17 @@
+<!-- add limit and offset -->
+<a 
+    [routerLink]="['/news/limit/'+limit+'/offset/'+offset+'/selectedNew/'+post.identifier]" 
+    [attr.aria-label]="'Read more about '+post.title"
+    [ngClass]="['article', selectedNew === post.identifier ? ' article--selected' : '']">
+    <img
+        [attr.data-src]="'https://demo.dotcms.com/dA/'+post.identifier+'/titleImage/256w/20q/webp'" 
+        [alt]="'Image about the article '+post.title" 
+        width="100" 
+        height="100"
+        loading="lazy"
+    />
+    <div class="article__content">
+        <p class="article__title">{{post.title}}</p>
+        <p class="article__time">{{post.postingDate | timeSince}}</p>
+    </div>
+</a>

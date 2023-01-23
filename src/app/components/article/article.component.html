@@ -1,0 +1,19 @@
+<ng-template [ngIf]="post" [ngIfElse]="loading">
+    <article class="article" *ngIf="post">
+        <div class="article__image-title">
+            <img  [src]="'https://demo.dotcms.com/dA/'+post.identifier+'/titleImage'" 
+            [attr.data-src]="'https://demo.dotcms.com/dA/'+post.identifier+'/titleImage'" 
+            [alt]="'Image about the article '+post.title" class="article__image" />
+            <div class="article__title-time-wrapper">
+                <h2>{{post.title}}</h2>
+                <p>{{post.postingDate}}</p>
+            </div>
+        </div>
+        <div [innerHTML]="htmlString" class="article__content"></div>
+    </article>
+</ng-template>
+
+<ng-template #loading>
+    <p>Loading article...</p>
+</ng-template>
+

@@ -1,0 +1,29 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    height: 100px;
+    background-color: #755dd5;
+    background-image: linear-gradient(-225deg, #755dd5 35%, #3788d1);
+
+    .main-title{
+        color: white;
+        font-weight: bold;
+        font-size: 30px;
+    }
+
+    .filter-date{
+        label{
+            margin-right: 10px;
+            font-weight: 300;
+            color: white;
+        }
+
+        select{
+            width: 100px;
+            height: 30px;
+            border-radius: 6px;
+        }
+    }
+}
