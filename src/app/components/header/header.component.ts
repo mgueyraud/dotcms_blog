@@ -14,10 +14,9 @@ export class HeaderComponent {
   constructor(private filterSvc: FiltersService, private route: ActivatedRoute){}
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe((params: ParamMap) => {
-      this.limit = Number(params.get('limit'));
-      this.offset = Number(params.get('offset'));
-    });
+    const params = this.route.snapshot.params;
+    this.limit = Number(params['limit'] as string);
+    this.offset = Number(params['offset'] as string);
   }
 
   onChange(ev: Event){

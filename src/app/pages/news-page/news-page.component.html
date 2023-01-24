@@ -1,8 +1,11 @@
+<app-header></app-header>
+
+
 <main class="wrapper">
 
     <ul class="news-list">
 
-        <ng-template [ngIf]="posts.length" [ngIfElse]="loading">
+        <ng-template [ngIf]="posts" [ngIfElse]="loading">
             <li *ngFor="let post of posts">
                 <app-news-list-item [post]="post"></app-news-list-item>
             </li>
@@ -12,6 +15,10 @@
             <li *ngFor="let i of [].constructor(10)">
                 <div class="square-skeleton"></div>
             </li>
+        </ng-template>
+
+        <ng-template [ngIf]="posts && posts.length === 0">
+            No data
         </ng-template>
         
     </ul>

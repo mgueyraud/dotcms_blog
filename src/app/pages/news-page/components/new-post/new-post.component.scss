@@ -1,0 +1,41 @@
+.form{
+    height: calc(100vh - 100px);
+    overflow: scroll;
+    padding: 50px 60px;
+    display: flex;
+    flex-direction: column;
+
+    h2{
+        font-size: 25px;
+        text-transform: uppercase;
+        font-weight: bold;
+        margin-bottom: 40px;
+    }
+
+    .field{
+        width: 100%;
+        display: block;
+        margin-top:10px;
+        margin-bottom: 20px;
+        font-size: 16px;
+        padding: 10px 10px;
+        border-radius: 6px;
+        border: 1px solid black;
+    }
+
+    .field__label{
+        font-weight: 600;
+    }
+
+    .field--textarea{
+        height: 400px;
+    }
+
+    button{
+        border: 1px solid black;
+        margin-left: auto;
+        display: block;
+        padding: 10px 20px;
+        cursor: pointer;
+    }
+}

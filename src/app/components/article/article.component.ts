@@ -3,7 +3,7 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { tap, single } from 'rxjs';
 import { APIResponse } from 'src/app/interfaces/news.interface';
 import { NewsService } from '../../services/news.service';
-import { Contentlet, BlogContent, FinalContent } from '../../interfaces/news.interface';
+import { Contentlet, BlogContent, DocContent } from '../../interfaces/news.interface';
 
 @Component({
   selector: 'app-article',
@@ -13,27 +13,38 @@ import { Contentlet, BlogContent, FinalContent } from '../../interfaces/news.int
 export class ArticleComponent implements OnInit {
   selectedNew!: string | null;
   post: Contentlet | null = null;
+  timeReading: string = '';
   htmlString!: string;
 
-  constructor(private route: ActivatedRoute, private newsSvc: NewsService){}
+  constructor(
+    private route: ActivatedRoute, 
+    private newsSvc: NewsService,
+  ){}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.selectedNew = params.get('selectedNew');
 
       if(this.selectedNew){
+        this.newsSvc.selectedNew = this.selectedNew;
         this.post = null;
         this.newsSvc.getSingleNew(this.selectedNew)
               .pipe(tap((res: APIResponse) => {
                 this.post = res.contentlets[0];
-                this.htmlString = `<div class="article-content">${this.buildHtml(this.post.blogContent.content)}</div>`;
+                const { blogContent } = this.post;
+                const isContentString = typeof blogContent === 'string';
+                this.timeReading = !isContentString && blogContent.attrs ? blogContent.attrs.readingTime + 'm read' : ''
+                this.htmlString = `
+                  <div class="article-content">
+                    ${isContentString ? blogContent : this.buildHtml(blogContent.content)}
+                  </div>`;
               }))
               .subscribe();
       }
     });
 
   }
-
+  
   buildHtml(content: BlogContent):string  {
     let html = '';
 

@@ -21,7 +21,7 @@ export interface Contentlet {
     hostName:            string;
     modDate:             Date;
     imageMetaData:       ImageMetaData;
-    blogContent:         DocContent;
+    blogContent:         DocContent | string;
     title:               string;
     baseType:            string;
     archived:            boolean;

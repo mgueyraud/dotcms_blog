@@ -9,6 +9,8 @@ import { TimeSincePipe } from 'src/app/pipes/timeSince.pipe';
 import { PublishedFormatPipe } from 'src/app/pipes/pubishedFormat.pipe';
 import { LazyImgDirective } from 'src/app/directives/images.directives';
 import { NewPostComponent } from './components/new-post/new-post.component';
+import { FormsModule } from '@angular/forms';
+import { HeaderComponent } from '../../components/header/header.component';
 
 
 @NgModule({
@@ -19,11 +21,13 @@ import { NewPostComponent } from './components/new-post/new-post.component';
     TimeSincePipe,
     PublishedFormatPipe,
     LazyImgDirective,
-    NewPostComponent
+    NewPostComponent,
+    HeaderComponent
   ],
   imports: [
     CommonModule,
     NewsPageRoutingModule,
+    FormsModule
   ]
 })
 export class NewsPageModule { }

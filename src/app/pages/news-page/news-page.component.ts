@@ -13,23 +13,32 @@ import { NewsService } from 'src/app/services/news.service';
 export class NewsPageComponent implements OnInit {
   limit!: number;
   offset!: number;
-  posts: Contentlet[] = [];
+  posts: Contentlet[] | null = null;
   selectedNew!: string | null;
   filter$ = this.filterSvc.filter$;
+  news$ = this.newsSvc.news$;
   
   constructor(private route: ActivatedRoute, private newsSvc: NewsService, private router: Router, private filterSvc: FiltersService){}
 
   ngOnInit(): void {
-   ( this.route.firstChild || this.route).paramMap.subscribe((params: ParamMap) => {
-      this.limit = Number(params.get('limit'));
-      this.offset = Number(params.get('offset'));
-      this.selectedNew = params.get('selectedNew');
-    });
+    const params = this.route.snapshot.params;
+    this.limit = Number(params['limit'] as string);
+    this.offset = Number(params['offset'] as string);
+
+    this.route.firstChild?.params.subscribe(newParams => {
+      this.selectedNew = newParams['selectedNew'] as string | null;
+    })
 
     this.getNews();
+
+    this.news$.pipe(
+      tap(posts => 
+        this.posts = posts.length > 0 ? posts : null
+      )
+    ).subscribe();
     
     this.filter$.pipe(tap(yearString => {
-      this.posts = [];
+      this.posts = null;
       this.getNews(yearString);
     })).subscribe();
   }
@@ -37,10 +46,9 @@ export class NewsPageComponent implements OnInit {
   getNews(year?: string){
     this.newsSvc.getAllNews(this.limit, this.offset, year)
     .pipe(tap((res: APIResponse) => {
-      this.posts = res.contentlets;
-      console.log(this.selectedNew);
+      this.newsSvc.news = res.contentlets;
       if(!this.selectedNew && !this.router.url.endsWith('new-post')) {
-        this.router.navigate(['selectedNew', res.contentlets[0].identifier], {relativeTo: this.route});
+        this.router.navigate(['selectedNew', res.contentlets[0].identifier], { relativeTo:this.route });
       }
     }))
     .subscribe();

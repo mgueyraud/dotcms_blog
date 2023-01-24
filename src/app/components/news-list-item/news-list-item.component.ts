@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Contentlet } from '../../interfaces/news.interface';
+import { NewsService } from '../../services/news.service';
 
 @Component({
   selector: 'app-news-list-item',
@@ -12,14 +13,17 @@ export class NewsListItemComponent {
   limit!: number;
   offset!: number;
   selectedNew!: string | null;
+  selectedNews$ = this.newsSvc.selectedNew$;
   
-  constructor(private route: ActivatedRoute){}
+  constructor(private route: ActivatedRoute, private newsSvc: NewsService){}
 
   ngOnInit(): void {
-    (this.route.firstChild || this.route).paramMap.subscribe((params: ParamMap) => {
-      this.limit = Number(params.get('limit'));
-      this.offset = Number(params.get('offset'));
-      this.selectedNew = params.get('selectedNew');
-    });
+    const params = this.route.snapshot.params;
+    this.limit = Number(params['limit'] as string);
+    this.offset = Number(params['offset'] as string);
+    
+    this.selectedNews$.subscribe(selectedNew => {
+      this.selectedNew = selectedNew;
+    })
   }
 }

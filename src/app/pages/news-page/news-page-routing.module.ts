@@ -4,9 +4,10 @@ import { NewsPageComponent } from './news-page.component';
 import { ArticleComponent } from '../../components/article/article.component';
 import { NewPostComponent } from './components/new-post/new-post.component';
 
+
 const routes: Routes = [
   { 
-    path: '', 
+    path: 'limit/:limit/offset/:offset', 
     component: NewsPageComponent,
     children: [
       { 
@@ -18,6 +19,11 @@ const routes: Routes = [
         component: ArticleComponent 
       },
     ]
+  },
+  {
+    path: '',
+    redirectTo: 'limit/10/offset/0',
+    pathMatch: 'full'
   },
 ];
 

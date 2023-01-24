@@ -1,1 +1,31 @@
-<p>new-post works!</p>
+<form class="form" #form="ngForm" (ngSubmit)="onSubmit(form, $event)">
+    <h2>Create a new post</h2>
+
+    <fieldset>
+        <label class="field__label" for="title">Title:</label>
+        <input class="field" type="text" name="title" id="title" minlength="5"/>
+    </fieldset>
+
+    <fieldset>
+        <label class="field__label" for="urlTitle">URL Title:</label>
+        <input class="field" type="text" name="urlTitle" id="urlTitle" minlength="5"/>
+    </fieldset>
+
+    <fieldset>
+        <label class="field__label" for="postingDate">Posting date:</label>
+        <input class="field" type="date" name="postingDate" id="postingDate" minlength="5"/>
+    </fieldset>
+
+    <fieldset>
+        <label class="field__label" for="image">Image:</label>
+        <input class="field" type="text" name="image" id="image"/>
+    </fieldset>
+
+    <fieldset>
+        <label class="field__label" for="blogContent">Body:</label>
+        <textarea class="field field--textarea" name="blogContent" id="blogContent" minlength="5"></textarea>
+    </fieldset>
+
+    <button type="submit" class="btn">Create</button>
+
+</form>
