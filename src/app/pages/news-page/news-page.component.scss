@@ -1,11 +1,16 @@
 .wrapper{
     display: flex;
+    position: relative;
 
     .news-list{
         flex: 0.35;
         border-right: 1px solid lightgray;
         height: calc(100vh - 100px);
         overflow: scroll;
+
+        @media screen and (max-width: 768px){
+            flex: 1;
+        }
     }
 
     .square-skeleton {
@@ -21,7 +26,21 @@
    }
 
    .right-side-content{
-        flex: 0.75;
+    flex: 0.75;
+        @media screen and (max-width: 768px){
+            flex: 1;
+            position: absolute;
+            left: 100%;
+            top: 0;
+            z-index: 1;
+            background-color: white;
+
+            &.-is-active{
+                left: 0;
+                right: 0;
+            }
+        }
+
    }
 }
 

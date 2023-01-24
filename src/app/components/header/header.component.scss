@@ -11,9 +11,19 @@
         color: white;
         font-weight: bold;
         font-size: 30px;
+
+        @media screen and (max-width: 768px){
+            font-size: 20px;
+        }
     }
 
     .filter-date{
+        &>div{
+            @media screen and (max-width: 768px){
+                display: flex;
+            }
+        }
+
         label{
             margin-right: 20px;
             font-weight: 300;

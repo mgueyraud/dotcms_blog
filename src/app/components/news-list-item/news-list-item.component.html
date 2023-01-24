@@ -2,7 +2,8 @@
 <a 
     [routerLink]="['/news/limit/'+limit+'/offset/'+offset+'/selectedNew/'+post.identifier]" 
     [attr.aria-label]="'Read more about '+post.title"
-    [ngClass]="['article', selectedNew === post.identifier ? ' article--selected' : '']">
+    [ngClass]="['article', selectedNew === post.identifier ? ' article--selected' : '']"
+    (click)="changeSelectedNew(post.identifier)">
     <img
         [attr.data-src]="'https://demo.dotcms.com/dA/'+post.identifier+'/titleImage/256w/20q/webp'" 
         [alt]="'Image about the article '+post.title" 

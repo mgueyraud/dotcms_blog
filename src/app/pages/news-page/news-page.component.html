@@ -9,6 +9,10 @@
             <li *ngFor="let post of posts">
                 <app-news-list-item [post]="post"></app-news-list-item>
             </li>
+            
+            <ng-template [ngIf]="posts.length === 0">
+                No data
+            </ng-template>
         </ng-template>
            
         <ng-template #loading>
@@ -17,13 +21,10 @@
             </li>
         </ng-template>
 
-        <ng-template [ngIf]="posts && posts.length === 0">
-            No data
-        </ng-template>
         
     </ul>
 
-    <div class="right-side-content">
+    <div [ngClass]="['right-side-content', this.isRightSideActiveMobile ? ' -is-active': '']">
         <router-outlet></router-outlet>
     </div>
 </main>

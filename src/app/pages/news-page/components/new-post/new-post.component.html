@@ -1,4 +1,7 @@
 <form class="form" #form="ngForm" (ngSubmit)="onSubmit(form, $event)">
+    <div class="btn-go-back-container" (click)="goBackMobile()">
+        <button class="btn-go-back">Go back</button>
+    </div>
     <h2>Create a new post</h2>
 
     <fieldset>

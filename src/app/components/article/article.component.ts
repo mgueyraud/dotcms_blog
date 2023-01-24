@@ -1,9 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { tap, single } from 'rxjs';
+import { tap } from 'rxjs';
 import { APIResponse } from 'src/app/interfaces/news.interface';
 import { NewsService } from '../../services/news.service';
-import { Contentlet, BlogContent, DocContent } from '../../interfaces/news.interface';
+import { Contentlet, BlogContent } from '../../interfaces/news.interface';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-article',
@@ -19,6 +20,7 @@ export class ArticleComponent implements OnInit {
   constructor(
     private route: ActivatedRoute, 
     private newsSvc: NewsService,
+    private location: Location
   ){}
 
   ngOnInit(): void {
@@ -26,7 +28,6 @@ export class ArticleComponent implements OnInit {
       this.selectedNew = params.get('selectedNew');
 
       if(this.selectedNew){
-        this.newsSvc.selectedNew = this.selectedNew;
         this.post = null;
         this.newsSvc.getSingleNew(this.selectedNew)
               .pipe(tap((res: APIResponse) => {
@@ -44,7 +45,12 @@ export class ArticleComponent implements OnInit {
     });
 
   }
-  
+
+  goBackMobile():void{
+    this.newsSvc.selectedNew = '';
+    this.location.back();
+  }
+
   buildHtml(content: BlogContent):string  {
     let html = '';
 

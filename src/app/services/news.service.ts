@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Contentlet, APIResponse } from '../interfaces/news.interface';
@@ -29,7 +29,7 @@ export class NewsService {
   }
   
   addNew(newPost: Contentlet){
-    this.newsSubject.next([...this.newsSubject.getValue(), newPost])
+    this.newsSubject.next([newPost, ...this.newsSubject.getValue()])
   }
 
   getAllNews(limit: number, offset:number, year?: string): Observable<APIResponse>{
@@ -59,20 +59,21 @@ export class NewsService {
     return this.http.get<APIResponse>(this.baseURLApi + `/id/${identifier}`);
   }
 
-  createNewPost(formData: FormData): Observable<APIResponse>{
+  createNewPost(formData: FormData): Observable<HttpResponse<APIResponse>>{
 
     // this.http.post<APIResponse>()
     formData.set('contentType', 'Blog');
     formData.set('contentHost', '48190c8c-42c4-46af-8d1a-0cd5db894797');
 
-    return this.http.post<APIResponse>(
+    return this.http.post<HttpResponse<APIResponse>>(
       this.baseURLApi + '/publish/1', 
       formData,
       {
         headers:{
           DOTAUTH: 'YWRtaW5AZG90Y21zLmNvbTphZG1pbg==',
           'Content-Disposition': 'form-data; name="image""'
-        }
+        },
+        observe: 'response' as 'body'
       }
     );
   }
