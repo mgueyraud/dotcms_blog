@@ -37,18 +37,6 @@ export class NewsPageComponent implements OnInit {
     this.limit = Number(params['limit'] as string);
     this.offset = Number(params['offset'] as string);
 
-    this.selectedNew = this.route.firstChild?.snapshot.params['selectedNew'];
-
-    this.isRightSideActiveMobile = this.router.url.includes('selectedNew') || this.router.url.includes('new-post');
-
-    this.selectedNews$.subscribe(selectedNew => {
-      if(selectedNew.length > 0){
-        this.selectedNew = selectedNew;
-      }
-    })
-
-    this.getNews();
-
     this.news$.pipe(
       tap(posts => {
         this.posts = posts;
@@ -60,6 +48,16 @@ export class NewsPageComponent implements OnInit {
       this.posts = null;
       this.getNews(yearString);
     })).subscribe();
+
+    this.selectedNews$.subscribe(selectedNew => {
+        this.selectedNew = selectedNew;
+    });
+    
+    this.selectedNew = this.route.firstChild?.snapshot.params['selectedNew'];
+    
+    this.isRightSideActiveMobile = this.router.url.includes('selectedNew') || this.router.url.includes('new-post');
+    
+    this.getNews();
   }
 
   getNews(year?: string){

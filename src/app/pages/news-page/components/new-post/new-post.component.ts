@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { tap } from 'rxjs';
 import { NewsService } from '../../../../services/news.service';
 import { Location } from '@angular/common';
-import { HttpResponse } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Contentlet } from '../../../../interfaces/news.interface';
 
@@ -25,6 +23,7 @@ export class NewPostComponent implements OnInit{
   ngOnInit(): void {
     //Better UX and for accessibility reasons also
     document.querySelector('input')?.focus();
+    this.newsSvc.selectedNew = '';
 
     const params = this.route.parent?.snapshot.params;
 
@@ -47,9 +46,6 @@ export class NewPostComponent implements OnInit{
       .subscribe(res => {
         if(res.status === 200){
           const newPostIdentifier = res.headers.get('identifier');
-
-          this.newsSvc.selectedNew = newPostIdentifier || '';
-
           this.newsSvc.addNew(
             {
               title: formData.get('title'),
@@ -57,6 +53,8 @@ export class NewPostComponent implements OnInit{
               postingDate: formData.get('postingDate')
             } as Contentlet
           );
+
+          this.newsSvc.selectedNew = newPostIdentifier || '';
 
           this.router.navigate(['/news/limit',this.limit,'offset',this.offset,'selectedNew', newPostIdentifier]);
         }

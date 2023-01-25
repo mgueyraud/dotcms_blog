@@ -1,3 +1,5 @@
+@import "../../../styles/abstracts/mixins";
+
 .article{
     height: calc(100vh - 100px);
     overflow: scroll;
@@ -51,7 +53,7 @@
         font-weight: 300;
         display: none;
 
-        @media screen and (max-width: 768px){
+        @include respond(phone) {
             display: block;
         }
     }
@@ -79,14 +81,5 @@
         width: 90%;
         margin: 30px auto 0;
         height: 500px;
-    }
-}
-
-@keyframes wave-squares {
-    0% {
-        background-position: -200% 0;
-    }
-     100% {
-        background-position: 200% 0;
     }
 }

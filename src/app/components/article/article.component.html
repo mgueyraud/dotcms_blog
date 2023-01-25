@@ -1,8 +1,8 @@
 <ng-template [ngIf]="post" [ngIfElse]="loading">
     <article class="article" *ngIf="post">
         <div class="article__image-title">
-            <img  [src]="'https://demo.dotcms.com/dA/'+post.identifier+'/titleImage'" 
-            [attr.data-src]="'https://demo.dotcms.com/dA/'+post.identifier+'/titleImage'" 
+            <img  [src]="post.image ? 'https://demo.dotcms.com/dA/'+post.identifier+'/titleImage' : '/assets/no-image.jpg'" 
+            [attr.data-src]="post.image ? 'https://demo.dotcms.com/dA/'+post.identifier+'/titleImage' : '/assets/no-image.jpg'" 
             [alt]="'Image about the article '+post.title" class="article__image" />
             <div class="article__title-time-wrapper">
                 <h2>{{post.title}}</h2>

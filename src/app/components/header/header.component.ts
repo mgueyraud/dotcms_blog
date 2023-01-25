@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ParamMap, ActivatedRoute } from '@angular/router';
 import { FiltersService } from '../../services/filters.service';
+import { NewsService } from '../../services/news.service';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +12,7 @@ export class HeaderComponent {
   limit!: number;
   offset!: number;
 
-  constructor(private filterSvc: FiltersService, private route: ActivatedRoute){}
+  constructor(private filterSvc: FiltersService, private route: ActivatedRoute, private newsSvc: NewsService){}
 
   ngOnInit(): void {
     const params = this.route.snapshot.params;

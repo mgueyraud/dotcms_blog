@@ -57,7 +57,7 @@ export interface DocContentAttrs {
     readingTime: number;
 }
 
-export type BlogContent = HeadingContent[] | OtherContent[] | FinalContent[];
+export type BlogContent = HeadingContent[] | OtherContent[] | FinalContent[] | ImageContent[];
 
 export interface HeadingContent {
     type:   'heading';
@@ -68,6 +68,17 @@ export interface HeadingContent {
     content: BlogContent
 }
 
+export interface ImageContent {
+    type:   'dotImage';
+    attrs:  {
+        data:{
+            asset: string;
+            [key: string]: any;
+        }
+        [key: string]: any;
+    };
+}
+
 export interface OtherContent {
     type:    'bulletList' | 'listItem' | 'paragraph';
     attrs?:  {[key: string]: any};
@@ -76,6 +87,7 @@ export interface OtherContent {
 
 export interface FinalContent {
     type: 'text';
+    marks?: {[key: string]: any}[];
     text: string;
 }
 

@@ -1,3 +1,5 @@
+@import "../../../../../styles/abstracts/mixins";
+
 .form{
     height: calc(100vh - 100px);
     overflow: scroll;
@@ -38,8 +40,8 @@
         top: 0;
         left: 0;
         display: none;
-    
-        @media screen and (max-width: 768px){
+
+        @include respond(phone) {
             display: block;
         }
     }

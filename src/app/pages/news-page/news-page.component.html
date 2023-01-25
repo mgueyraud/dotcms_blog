@@ -7,7 +7,7 @@
 
         <ng-template [ngIf]="posts" [ngIfElse]="loading">
             <li *ngFor="let post of posts">
-                <app-news-list-item [post]="post"></app-news-list-item>
+                <app-news-list-item [post]="this.post" [selectedNew]="this.selectedNew"></app-news-list-item>
             </li>
             
             <ng-template [ngIf]="posts.length === 0">

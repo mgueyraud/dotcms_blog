@@ -38,6 +38,9 @@ export class NewsService {
 
     //MM/DD/YYYY
     switch(year){
+      case '2023':
+        yearQuery = '%5B20230101140000 TO 20231231160000%5D'
+        break;
       case '2022':
         yearQuery = '%5B20220101140000 TO 20221231160000%5D'
         break;

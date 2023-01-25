@@ -5,7 +5,7 @@
     [ngClass]="['article', selectedNew === post.identifier ? ' article--selected' : '']"
     (click)="changeSelectedNew(post.identifier)">
     <img
-        [attr.data-src]="'https://demo.dotcms.com/dA/'+post.identifier+'/titleImage/256w/20q/webp'" 
+        [attr.data-src]="post.image ? 'https://demo.dotcms.com/dA/'+post.identifier+'/titleImage/256w/20q/webp' : '/assets/no-image.jpg'" 
         [alt]="'Image about the article '+post.title" 
         width="100" 
         height="100"

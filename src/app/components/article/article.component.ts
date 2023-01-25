@@ -54,6 +54,8 @@ export class ArticleComponent implements OnInit {
   buildHtml(content: BlogContent):string  {
     let html = '';
 
+    if(!content) return '';
+
     for (let index = 0; index < content.length; index++) {
       const singleContent = content[index];
       if(singleContent.type === 'bulletList'){
@@ -80,9 +82,20 @@ export class ArticleComponent implements OnInit {
         html += this.buildHtml(singleContent.content);
         html += `</${tag}>`;
       }
+      
+      if(singleContent.type === 'dotImage'){
+        html += `<img src="https://demo.dotcms.com${singleContent.attrs.data.asset}"/>`;
+      }
 
       if(singleContent.type === 'text'){
-        html += singleContent.text;
+        if(singleContent.marks?.[0]['type'] === 'bold'){
+          html += `<b>${singleContent.text}</b>`;
+        }else if(singleContent.marks?.[0]['type'] === 'link'){
+          html += `<a href="${singleContent.marks?.[0]['attrs']['href']}" target="_blank">${singleContent.text}</a>`;
+        }else{
+          html += singleContent.text;
+        }
+
       }
     }
 

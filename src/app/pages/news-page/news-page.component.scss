@@ -1,3 +1,5 @@
+@import "../../../styles/abstracts/mixins";
+
 .wrapper{
     display: flex;
     position: relative;
@@ -8,7 +10,7 @@
         height: calc(100vh - 100px);
         overflow: scroll;
 
-        @media screen and (max-width: 768px){
+        @include respond(phone) {
             flex: 1;
         }
     }
@@ -27,28 +29,19 @@
 
    .right-side-content{
     flex: 0.75;
-        @media screen and (max-width: 768px){
-            flex: 1;
-            position: absolute;
-            left: 100%;
-            top: 0;
-            z-index: 1;
-            background-color: white;
+    
+    @include respond(phone) {
+        flex: 1;
+        position: absolute;
+        left: 100%;
+        top: 0;
+        z-index: 1;
+        background-color: white;
 
-            &.-is-active{
-                left: 0;
-                right: 0;
-            }
+        &.-is-active{
+            left: 0;
+            right: 0;
         }
-
+    }
    }
-}
-
-@keyframes wave-squares {
-    0% {
-        background-position: -200% 0;
-    }
-     100% {
-        background-position: 200% 0;
-    }
 }
