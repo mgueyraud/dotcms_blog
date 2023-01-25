@@ -65,7 +65,9 @@ export class NewsPageComponent implements OnInit {
     .pipe(tap((res: APIResponse) => {
       this.newsSvc.news = res.contentlets;
       if(!this.selectedNew && !this.router.url.endsWith('new-post') && window.innerWidth > 768) {
-        this.router.navigate(['selectedNew', res.contentlets[0].identifier], { relativeTo:this.route });
+        const selectedId = res.contentlets[0].identifier;
+        this.newsSvc.selectedNew = selectedId;
+        this.router.navigate(['selectedNew', selectedId], { relativeTo:this.route });
       }
     }))
     .subscribe();
