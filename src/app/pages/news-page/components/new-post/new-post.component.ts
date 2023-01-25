@@ -38,7 +38,7 @@ export class NewPostComponent implements OnInit{
     this.location.back();
   }
 
-  onSubmit(form:NgForm, ev: Event){
+  onSubmit(ev: Event){
 
     const formData = new FormData(ev.target as HTMLFormElement);
     

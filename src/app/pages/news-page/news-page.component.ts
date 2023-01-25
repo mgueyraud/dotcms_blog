@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap, Router, RouterEvent, Event } from '@angular/router';
+import { ActivatedRoute, Router, RouterEvent, Event } from '@angular/router';
 import { filter, tap } from 'rxjs';
 import { APIResponse, Contentlet } from 'src/app/interfaces/news.interface';
 import { FiltersService } from 'src/app/services/filters.service';
 import { NewsService } from 'src/app/services/news.service';
-import { ChangeDetectorRef } from '@angular/core';
-
 
 @Component({
   selector: 'app-news-page',

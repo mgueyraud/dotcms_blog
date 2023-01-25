@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ParamMap, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { FiltersService } from '../../services/filters.service';
 import { NewsService } from '../../services/news.service';
 
